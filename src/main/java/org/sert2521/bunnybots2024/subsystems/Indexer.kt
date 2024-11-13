@@ -3,7 +3,6 @@ package org.sert2521.bunnybots2024.subsystems
 import com.revrobotics.CANSparkBase
 import com.revrobotics.CANSparkLowLevel
 import com.revrobotics.CANSparkMax
-import com.revrobotics.jni.CANSparkMaxJNI
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import org.sert2521.bunnybots2024.ElectricIDs
 
@@ -26,8 +25,8 @@ object Indexer : Subsystem {
         motor.stopMotor()
     }
 
-    fun getEncoderValue(){
+    /*fun getEncoderValue(){
 
-    }
+    }*/
 
 }
