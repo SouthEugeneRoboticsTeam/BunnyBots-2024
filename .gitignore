@@ -331,6 +331,7 @@ bin/
 *-window.json
 .idea
 .gradle
+.run
 
 # End entries from WPI Lib team
 
