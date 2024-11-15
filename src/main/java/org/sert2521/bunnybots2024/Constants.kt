@@ -9,7 +9,7 @@ object PhysicalConstants {
 }
 
 object ElectricIDs{
-
+    const val OUTTAKE_ID = -1
 }
 
 object TunedConstants{
