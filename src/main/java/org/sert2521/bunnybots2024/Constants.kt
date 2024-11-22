@@ -10,6 +10,7 @@ object PhysicalConstants {
 
 object ElectricIDs{
 const val INTAKE_ID = -1
+    const val TAIL_ID = -1
 }
 
 object TunedConstants{
