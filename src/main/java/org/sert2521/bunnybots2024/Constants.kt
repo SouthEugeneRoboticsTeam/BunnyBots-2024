@@ -1,5 +1,8 @@
 package org.sert2521.bunnybots2024
 
+import com.revrobotics.CANSparkLowLevel
+import com.revrobotics.CANSparkMax
+
 object ConfigConstants{
 
 }
