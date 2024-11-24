@@ -3,7 +3,6 @@ package org.sert2521.bunnybots2024.subsystems
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.kinematics.ChassisSpeeds
 import edu.wpi.first.wpilibj.Filesystem
-import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.sert2521.bunnybots2024.ConfigConstants
 import swervelib.parser.SwerveParser
@@ -27,11 +26,11 @@ object Drivetrain : SubsystemBase() {
         swerve.driveFieldOriented(fieldSpeeds)
     }
 
-    fun driveHeadingSetpoint(transX:Double, transY:Double, heading:Rotation2d){
+    fun driveHeadingSetpoint(inputX:Double, inputY:Double, heading:Rotation2d){
         swerve.driveFieldOriented(
             swerve.swerveController.getTargetSpeeds(
-                transX,
-                transY,
+                inputX,
+                inputY,
                 heading.sin,
                 heading.cos,
                 swerve.yaw.radians,
