@@ -14,4 +14,8 @@ class RunFan {
     override fun end () {
         Fan.stopFan()
     }
+
+    override fun isFinished (): Boolean {
+        return false
+    }
 }
