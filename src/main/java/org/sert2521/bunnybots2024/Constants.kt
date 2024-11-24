@@ -14,6 +14,7 @@ object ElectricIDs{
 }
 
 object TunedConstants{
-
+    const val FAN_UP_ANGLE = 0.0
+    const val FAN_DOWN_ANGLE = 0.0
 }
 
