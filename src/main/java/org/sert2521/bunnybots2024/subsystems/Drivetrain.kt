@@ -39,6 +39,10 @@ object Drivetrain : SubsystemBase() {
         )
     }
 
+    fun configureVision(){
+
+    }
+
 
 
 }
