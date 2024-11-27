@@ -18,6 +18,7 @@ object WristSubsystem : SubsystemBase() {
         wristMotor.idleMode = CANSparkBase.IdleMode.kBrake
         wristMotor.setSmartCurrentLimit(35)
         wristMotor.inverted = false;
+
         absEncoder.distancePerRotation = 2*PI
         absEncoder.positionOffset = PhysicalConstants.WRIST_ENCODER_OFFSET
     }
