@@ -15,6 +15,9 @@ object ElectricIDs{
 }
 
 object TunedConstants{
-
+    const val WRIST_S = 0.0
+    const val WRIST_G = 0.0
+    const val WRIST_V = 0.0
+    const val WRIST_A = 0.0
 }
 
