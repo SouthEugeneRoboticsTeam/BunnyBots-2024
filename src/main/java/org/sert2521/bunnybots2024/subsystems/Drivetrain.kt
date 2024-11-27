@@ -1,8 +1,11 @@
 package org.sert2521.bunnybots2024.subsystems
 
+import edu.wpi.first.math.VecBuilder
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.kinematics.ChassisSpeeds
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics
 import edu.wpi.first.wpilibj.Filesystem
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.bunnybots2024.ConfigConstants
@@ -15,9 +18,6 @@ object Drivetrain : SubsystemBase() {
     private val swerveDir = File(Filesystem.getDeployDirectory(), "swerve")
     val swerve = SwerveParser(swerveDir).createSwerveDrive(ConfigConstants.DRIVE_SPEED)
 
-    val tx = LimelightHelpers.getTX("")
-    val ty = LimelightHelpers.getTY("")
-    val ta = LimelightHelpers.getTA("")
 
     val hasTarget = LimelightHelpers.getTV("")
 
@@ -47,17 +47,29 @@ object Drivetrain : SubsystemBase() {
         )
     }
 
-    fun getVisionEstimate(): Pose2d{
+    fun updateVision(){
+        var rejectUpdate = false
+
+
         LimelightHelpers.SetRobotOrientation(
             "limelight",
-            swerve.swerveDrivePoseEstimator.estimatedPosition.rotation.degrees,
+            swerve.yaw.degrees,
             0.0,
             swerve.pitch.degrees,
             0.0,
             swerve.roll.degrees,
             0.0
         )
+        val mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight")
+        if (swerve.gyro.rate > 720 || mt2.tagCount == 0){
+            rejectUpdate = true
+        }
+        if (!rejectUpdate){
+            swerve.setVisionMeasurementStdDevs(
+                VecBuilder.fill(0.7, 0.7, 999999999.9))
 
+            swerve.addVisionMeasurement(mt2.pose, mt2.timestampSeconds)
+        }
     }
 
     fun configureVision(){
