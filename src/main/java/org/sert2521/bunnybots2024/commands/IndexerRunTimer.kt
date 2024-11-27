@@ -3,6 +3,7 @@ package org.sert2521.bunnybots2024.commands
 import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.bunnybots2024.subsystems.Indexer
 
+//a version of the IndexerRun command that uses a timer to move the balloons past the beam break
 class IndexerRunTimer : Command() {
     var timer = 10
     var isRunning = true
@@ -16,12 +17,14 @@ class IndexerRunTimer : Command() {
     override fun initialize() {}
 
     override fun execute() {
+        //resets the timer if it ends before the beam break is cleared, and ticks it down otherwise
         if (Indexer.getBeamBreak() && timer==0){
             timer = 10
         }
         else {
             timer -= 1
         }
+        //runs the indexer whenever the timer isn't 0
         if (timer != 0){
             Indexer.setMotor(0.3)
         }

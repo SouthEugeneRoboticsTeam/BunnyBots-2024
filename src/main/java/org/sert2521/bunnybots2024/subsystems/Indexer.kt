@@ -16,22 +16,27 @@ object Indexer : Subsystem {
     private val colorSensor = ColorSensorV3(I2C.Port.kOnboard)
 
     init {
+        //sets the motor to brake, have a limit of 30, and not be inverted
         indexerMotor.idleMode = CANSparkBase.IdleMode.kBrake
         indexerMotor.setSmartCurrentLimit(30)
         indexerMotor.inverted = false
 
+        //will run the IndexerRun command as the default
         this.defaultCommand = IndexerRun()
     }
 
 
+    //doubles speed
     fun setMotor(speed: Double) {
         indexerMotor.set(speed)
     }
 
+    //stops motor
     fun stopMotor(){
         indexerMotor.stopMotor()
     }
 
+    //gets beam break
     fun getBeamBreak():Boolean{
         return !beamBreak.get()
     }

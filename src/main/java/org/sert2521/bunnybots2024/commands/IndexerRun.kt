@@ -14,6 +14,7 @@ class IndexerRun : Command() {
     override fun initialize() {}
 
     override fun execute() {
+        //sets the indexer speed to 0.3 when a balloon is in the beam break and stops it when there isn't
         if (Indexer.getBeamBreak()){
             Indexer.setMotor(0.3)
         }
