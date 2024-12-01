@@ -54,7 +54,7 @@ object Drivetrain : SubsystemBase() {
         LimelightHelpers.SetRobotOrientation(
             "limelight",
             swerve.yaw.degrees,
-            0.0,
+            swerve.gyro.rate,
             swerve.pitch.degrees,
             0.0,
             swerve.roll.degrees,
@@ -74,6 +74,18 @@ object Drivetrain : SubsystemBase() {
 
     fun configureVision(){
 
+    }
+
+    fun getPose():Pose2d{
+        return swerve.pose
+    }
+
+    fun setPose(newPose:Pose2d){
+        swerve.resetOdometry(newPose)
+    }
+
+    fun getRelativeSpeeds():ChassisSpeeds{
+        return swerve.robotVelocity
     }
 
 
