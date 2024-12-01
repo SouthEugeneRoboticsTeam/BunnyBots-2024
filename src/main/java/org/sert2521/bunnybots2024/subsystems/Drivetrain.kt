@@ -88,6 +88,14 @@ object Drivetrain : SubsystemBase() {
         return swerve.robotVelocity
     }
 
+    fun stop(){
+        swerve.drive(ChassisSpeeds(0.0, 0.0, 0.0))
+    }
+
+    fun getMaxSpeed():Double{
+        return swerve.maximumVelocity
+    }
+
 
 
 }
