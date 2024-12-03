@@ -4,16 +4,18 @@ import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.kinematics.ChassisSpeeds
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.InstantCommand
+import org.sert2521.bunnybots2024.ConfigConstants
 import org.sert2521.bunnybots2024.Input
 import org.sert2521.bunnybots2024.subsystems.Drivetrain
-import kotlin.math.pow
+import kotlin.math.*
+import kotlin.time.times
 
 class JoystickDrive(private val fieldOriented:Boolean = true) : Command() {
     val joystickX = Input::getJoystickX
     val joystickY = Input::getJoystickY
     val joystickZ = Input::getJoystickZ
 
-    val inputRotOffset = Input::getRotationOffset
+    val inputRotOffset = Input::getRotOffset
 
 
 
@@ -27,15 +29,26 @@ class JoystickDrive(private val fieldOriented:Boolean = true) : Command() {
     }
 
     override fun execute() {
+        val x = joystickX()
+        val y = joystickY()
+
+        var magnitude = sqrt(x.pow(2)+y.pow(2))
+        val angle = atan2(y, x)
+
+        magnitude = magnitude.pow(3)
+
+        val newX = cos(angle)*magnitude
+        val newY = sin(angle)*magnitude
+
         if (joystickX() == 0.0 && joystickY() == 0.0 && joystickZ() == 0.0){
             Drivetrain.stop()
         }
         else if (fieldOriented) {
             Drivetrain.driveRobotOriented(
                 ChassisSpeeds.fromFieldRelativeSpeeds(
-                    joystickX().pow(3) * Drivetrain.getMaxSpeed(),
-                    joystickY().pow(3) * Drivetrain.getMaxSpeed(),
-                    joystickZ().pow(3) * Drivetrain.getMaxSpeed(),
+                    newY * ConfigConstants.DRIVE_SPEED,
+                    newX * ConfigConstants.DRIVE_SPEED,
+                    joystickZ().pow(3) * ConfigConstants.ROT_SPEED,
                     Drivetrain.getPose().rotation.minus(inputRotOffset())
                 )
             )
@@ -43,16 +56,15 @@ class JoystickDrive(private val fieldOriented:Boolean = true) : Command() {
         else {
             Drivetrain.driveRobotOriented(
                 ChassisSpeeds(
-                    joystickX().pow(3) * Drivetrain.getMaxSpeed(),
-                    joystickY().pow(3) * Drivetrain.getMaxSpeed(),
-                    joystickZ().pow(3) * Drivetrain.getMaxSpeed()
+                    newY * ConfigConstants.DRIVE_SPEED,
+                    newX * ConfigConstants.DRIVE_SPEED,
+                    joystickZ().pow(3) * ConfigConstants.ROT_SPEED
                 )
             )
         }
     }
 
     override fun isFinished(): Boolean {
-        // TODO: Make this return true when this Command no longer needs to run execute()
         return false
     }
 

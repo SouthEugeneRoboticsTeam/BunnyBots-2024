@@ -23,18 +23,22 @@ object Input {
     }
 
     fun getJoystickX():Double{
-        return driverController.leftX
+        return -driverController.leftX
     }
 
     fun getJoystickY():Double{
-        return driverController.leftY
+        return -driverController.leftY
     }
 
     fun getJoystickZ():Double {
         return driverController.rightX
     }
 
-    fun getRotationOffset():Rotation2d{
+    fun getRotOffset():Rotation2d{
         return rotationOffset
+    }
+
+    fun getRotY():Double{
+        return driverController.rightY
     }
 }

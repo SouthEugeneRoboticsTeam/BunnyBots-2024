@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.TimedRobot
 import edu.wpi.first.wpilibj.util.WPILibVersion
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.CommandScheduler
+import org.sert2521.bunnybots2024.subsystems.Drivetrain
 
 /**
  * The VM is configured to automatically run this object (which basically functions as a singleton class),
@@ -24,6 +25,10 @@ object Robot : TimedRobot()
     private var autonomousCommand: Command? = null
 
 
+    init {
+        Input
+        Drivetrain
+    }
     override fun robotInit()
     {
         // Report the use of the Kotlin Language for "FRC Usage Report" statistics

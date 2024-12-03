@@ -1,29 +1,34 @@
 package org.sert2521.bunnybots2024.subsystems
 
 import edu.wpi.first.math.VecBuilder
-import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
+import edu.wpi.first.math.geometry.Translation2d
 import edu.wpi.first.math.kinematics.ChassisSpeeds
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics
 import edu.wpi.first.wpilibj.Filesystem
+import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.SubsystemBase
-import org.sert2521.bunnybots2024.ConfigConstants
+import org.sert2521.bunnybots2024.ConfigConstants.MAX_DRIVE_SPEED
+import org.sert2521.bunnybots2024.Input
+import org.sert2521.bunnybots2024.commands.JoystickDrive
 import org.sert2521.bunnybots2024.limelightlib.LimelightHelpers
+import swervelib.math.SwerveMath
 import swervelib.parser.SwerveParser
 import swervelib.telemetry.SwerveDriveTelemetry
 import java.io.File
 
 object Drivetrain : SubsystemBase() {
     private val swerveDir = File(Filesystem.getDeployDirectory(), "swerve")
-    val swerve = SwerveParser(swerveDir).createSwerveDrive(ConfigConstants.DRIVE_SPEED)
+    val swerve = SwerveParser(swerveDir).createSwerveDrive(MAX_DRIVE_SPEED)
 
 
     val hasTarget = LimelightHelpers.getTV("")
 
     init {
+
         SwerveDriveTelemetry.verbosity = SwerveDriveTelemetry.TelemetryVerbosity.HIGH
-        swerve.swerveController
+
+        this.defaultCommand = JoystickDrive()
     }
 
     fun driveRobotOriented(chassisSpeeds: ChassisSpeeds){
@@ -96,6 +101,21 @@ object Drivetrain : SubsystemBase() {
         return swerve.maximumVelocity
     }
 
+    fun driveCommand(): Command {
+        return run{
+            val scaledInputs = SwerveMath.scaleTranslation(Translation2d(
+                Input.getJoystickX(),
+                Input.getJoystickY()),
+                0.8
+            )
+            driveFieldOriented(swerve.swerveController.getTargetSpeeds(scaledInputs.x, scaledInputs.y,
+                Input.getJoystickZ(),
+                Input.getRotY(),
+                swerve.odometryHeading.radians,
+                swerve.maximumVelocity
+            ));
+        }
+    }
 
 
 }
