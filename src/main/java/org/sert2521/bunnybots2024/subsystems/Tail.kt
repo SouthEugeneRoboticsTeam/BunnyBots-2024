@@ -9,13 +9,14 @@ import org.sert2521.bunnybots2024.ElectricIDs
 object TailSubsystem : SubsystemBase() {
     private val tailMotor = CANSparkMax(ElectricIDs.TAIL_ID, CANSparkLowLevel.MotorType.kBrushless)
     private val tailEncoder = tailMotor.encoder
+    private const val positionConversionFactor = Math.PI/24
 
     init {
         tailMotor.setSmartCurrentLimit(40)
         tailMotor.idleMode = CANSparkBase.IdleMode.kBrake
         tailMotor.inverted = false
 
-        tailEncoder.setPositionConversionFactor(Math.PI/24) // conversion factor pi/24
+        tailEncoder.setPositionConversionFactor(positionConversionFactor)
 
     }
 
@@ -34,4 +35,4 @@ object TailSubsystem : SubsystemBase() {
     fun getVelocity(): Double {
         return tailEncoder.velocity
     }
-} //test
+}
