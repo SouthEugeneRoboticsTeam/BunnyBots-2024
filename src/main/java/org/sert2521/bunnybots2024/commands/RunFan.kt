@@ -7,15 +7,15 @@ class RunFan {
 
     private val fanSpeed = ConfigConstants.FAN_RUN_SPEED
 
-    override fun initialize() {
+    fun initialize() {
         Fan.setFanSpeed(fanSpeed)
     }
 
-    override fun end () {
+    fun end () {
         Fan.stopFan()
     }
 
-    override fun isFinished (): Boolean {
+    fun isFinished (): Boolean {
         return false
     }
 }
