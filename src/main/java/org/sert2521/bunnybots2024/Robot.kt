@@ -3,11 +3,14 @@ package org.sert2521.bunnybots2024
 import edu.wpi.first.hal.FRCNetComm.tInstances
 import edu.wpi.first.hal.FRCNetComm.tResourceType
 import edu.wpi.first.hal.HAL
+import edu.wpi.first.math.geometry.Translation2d
 import edu.wpi.first.wpilibj.TimedRobot
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj.util.WPILibVersion
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.CommandScheduler
 import org.sert2521.bunnybots2024.subsystems.Drivetrain
+import kotlin.math.*
 
 /**
  * The VM is configured to automatically run this object (which basically functions as a singleton class),
@@ -41,6 +44,26 @@ object Robot : TimedRobot()
     override fun robotPeriodic()
     {
         CommandScheduler.getInstance().run()
+
+        val x = Input.getJoystickX()
+        val y = Input.getJoystickY()
+
+        var mult = 0.0
+
+        var angle = atan2(y, x)
+        if (x == 0.0 || y == 0.0){
+            mult = 1.0
+        }else if (abs(x)>=abs(y)){
+            mult = abs(cos(angle))
+        } else {
+            mult = abs(sin(angle))
+        }
+        var magnitude = Translation2d(x, y).norm * mult
+        angle = 360 * atan2(y, x) / (2 * PI) - 90
+
+
+        SmartDashboard.putNumber("Joystick Angle", angle)
+        SmartDashboard.putNumber("Joystick Magnitude", magnitude)
     }
 
     override fun disabledInit()

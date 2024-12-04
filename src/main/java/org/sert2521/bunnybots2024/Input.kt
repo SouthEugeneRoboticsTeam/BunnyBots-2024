@@ -31,7 +31,7 @@ object Input {
     }
 
     fun getJoystickZ():Double {
-        return driverController.rightX
+        return -driverController.rightX
     }
 
     fun getRotOffset():Rotation2d{

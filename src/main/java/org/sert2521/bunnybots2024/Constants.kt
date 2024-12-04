@@ -2,9 +2,9 @@ package org.sert2521.bunnybots2024
 
 object ConfigConstants{
     const val MAX_DRIVE_SPEED = 4.239
-    const val DRIVE_SPEED = 0.1
+    const val DRIVE_SPEED = 3.0
 
-    const val ROT_SPEED = 1.0
+    const val ROT_SPEED = 4.0
 }
 
 //Most swerve config is in deploy/swerve as .json files

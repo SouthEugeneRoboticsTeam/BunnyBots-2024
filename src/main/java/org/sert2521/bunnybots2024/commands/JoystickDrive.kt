@@ -1,12 +1,15 @@
 package org.sert2521.bunnybots2024.commands
 
 import edu.wpi.first.math.geometry.Rotation2d
+import edu.wpi.first.math.geometry.Translation2d
 import edu.wpi.first.math.kinematics.ChassisSpeeds
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.InstantCommand
 import org.sert2521.bunnybots2024.ConfigConstants
 import org.sert2521.bunnybots2024.Input
 import org.sert2521.bunnybots2024.subsystems.Drivetrain
+import java.text.Normalizer
 import kotlin.math.*
 import kotlin.time.times
 
@@ -32,8 +35,25 @@ class JoystickDrive(private val fieldOriented:Boolean = true) : Command() {
         val x = joystickX()
         val y = joystickY()
 
-        var magnitude = sqrt(x.pow(2)+y.pow(2))
+
+
+        var magnitude = Translation2d(x, y).norm
         val angle = atan2(y, x)
+
+
+        //this math works just believe
+        var mult = 0.0
+        if (x == 0.0 || y == 0.0){
+            mult = 1.0
+        }else if (abs(x)>=abs(y)){
+            mult = abs(cos(angle))
+        } else {
+            mult = abs(sin(angle))
+        }
+
+        magnitude *= mult
+
+        SmartDashboard.putNumber("Joystick Angle", angle)
 
         magnitude = magnitude.pow(3)
 
