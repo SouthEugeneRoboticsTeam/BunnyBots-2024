@@ -15,35 +15,37 @@ object WristSubsystem : SubsystemBase() {
     val absEncoder = DutyCycleEncoder(DUTY_ENCODER_ID)
 
     init {
+        //sets up motor
         wristMotor.idleMode = CANSparkBase.IdleMode.kBrake
         wristMotor.setSmartCurrentLimit(35)
         wristMotor.inverted = false;
 
+        //sets up encoder
         absEncoder.distancePerRotation = 2*PI
         absEncoder.positionOffset = PhysicalConstants.WRIST_ENCODER_OFFSET
     }
 
+    //Adjusts voltage of motor
     fun setVoltage(voltage: Double) {
         wristMotor.setVoltage(voltage)
     }
 
+    //Resets Encoder
     fun rezeroEncoder(){
         absEncoder.reset()
     }
 
-    fun getEncoder():Double{
-        //println(absEncoder.get())
-        return absEncoder.distance
+    //Adjusts the current limit of motor
+    fun setCurrentLimit(current:Int){
+        wristMotor.setSmartCurrentLimit(current)
     }
 
-    fun setCurrentLimit(first:Int){
-        wristMotor.setSmartCurrentLimit(first)
-    }
-
+    //Returns the angle of the wrist
     fun getRadians():Double{
         return absEncoder.distance
     }
 
+    //Stops the wrist motor
     fun stop() {
         wristMotor.stopMotor();
     }
