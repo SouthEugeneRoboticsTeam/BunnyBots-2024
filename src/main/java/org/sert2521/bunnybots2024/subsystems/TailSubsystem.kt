@@ -9,19 +9,29 @@ import org.sert2521.bunnybots2024.ElectricIDs
 object TailSubsystem : SubsystemBase() {
     private val tailMotor = CANSparkMax(ElectricIDs.TAIL_ID, CANSparkLowLevel.MotorType.kBrushless)
     private val tailEncoder = tailMotor.encoder
-    private const val positionConversionFactor = Math.PI/24
+    /*
+    I'm not sure if using a relative encoder is the right move here
+    because i'm relying on the up and down commands finishing at the
+    same angles every time. I imagine that can lead to a compounding of slight
+    errors over time.
+     */
+    private const val POSITION_CONVERSION_FACTOR = Math.PI/24
 
     init {
         tailMotor.setSmartCurrentLimit(40)
         tailMotor.idleMode = CANSparkBase.IdleMode.kBrake
-        tailMotor.inverted = false
+//        setInversion(false)
 
-        tailEncoder.setPositionConversionFactor(positionConversionFactor)
+        tailEncoder.setPositionConversionFactor(POSITION_CONVERSION_FACTOR)
 
     }
 
     fun setVoltage(voltage: Double) {
         tailMotor.setVoltage(voltage)
+    }
+
+    fun setInversion(inverted: Boolean) {
+        tailMotor.inverted = inverted
     }
 
     fun stopMotor() {
@@ -32,7 +42,7 @@ object TailSubsystem : SubsystemBase() {
         return tailEncoder.position
     }
 
-    fun getVelocity(): Double {
-        return tailEncoder.velocity
-    }
+//    fun getVelocity(): Double {
+//        return tailEncoder.velocity
+//    }
 }
