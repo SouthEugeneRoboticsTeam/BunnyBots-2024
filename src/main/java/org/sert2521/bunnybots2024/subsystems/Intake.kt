@@ -13,7 +13,7 @@ object Intake: Subsystem {
         intakeMotor.setSmartCurrentLimit(30)
         intakeMotor.inverted = false
     }
-    fun setMotor(speed:Double){
+    fun setMotor(speed:Double) {
         intakeMotor.set(speed)
     }
     fun stop(){
