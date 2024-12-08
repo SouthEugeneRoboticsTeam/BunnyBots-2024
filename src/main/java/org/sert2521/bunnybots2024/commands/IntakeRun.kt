@@ -3,7 +3,7 @@ package org.sert2521.bunnybots2024.commands
 import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.bunnybots2024.subsystems.Intake
 
-class RunIntake: Command()
+class IntakeRun: Command()
 {
         private val intake = Intake
 
