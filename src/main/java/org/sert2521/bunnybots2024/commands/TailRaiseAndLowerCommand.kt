@@ -7,7 +7,7 @@ import org.sert2521.bunnybots2024.TunedConstants
 import org.sert2521.bunnybots2024.subsystems.TailSubsystem
 
 
-class TailDownCommand : Command() {
+class TailRaiseAndLowerCommand(private val setPoint: Double) : Command() {
     private val tailSubsystem = TailSubsystem
     private val tailPid = PIDController(
         TunedConstants.TAIL_P,
@@ -20,15 +20,19 @@ class TailDownCommand : Command() {
     }
 
     override fun initialize() {
-        tailSubsystem.setInversion(false)
-        tailPid.setpoint = Math.PI / 2 /* assuming that the only position the tail can start this command
-                                        * in is the raised position. */
-        tailPid.setTolerance(0.01)
+        tailPid.setpoint = setPoint
+
+        if (setPoint > tailSubsystem.getAngleRads()) {
+            tailSubsystem.setInversion(false)
+        }
+        else if (setPoint < tailSubsystem.getAngleRads()) {
+            tailSubsystem.setInversion(true)
+        }
     }
 
     override fun execute() {
-        val calculate = tailPid.calculate(tailSubsystem.getAngleRads())
-        tailSubsystem.setVoltage(calculate)
+        val nextVoltage = tailPid.calculate(tailSubsystem.getAngleRads())
+        tailSubsystem.setVoltage(nextVoltage)
     }
 
     override fun isFinished(): Boolean {
@@ -36,6 +40,7 @@ class TailDownCommand : Command() {
     }
 
     override fun end(interrupted: Boolean) {
-        tailSubsystem.stopMotor()
+        // not stopping motor because TailStayStillCommand() should hold the motor in place
+        // when the tail is not being raised or lowered.
     }
 }
