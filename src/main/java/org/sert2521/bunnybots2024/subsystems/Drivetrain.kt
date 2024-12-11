@@ -16,6 +16,7 @@ import swervelib.math.SwerveMath
 import swervelib.parser.SwerveParser
 import swervelib.telemetry.SwerveDriveTelemetry
 import java.io.File
+import java.util.*
 
 object Drivetrain : SubsystemBase() {
     private val swerveDir = File(Filesystem.getDeployDirectory(), "swerve")
@@ -50,6 +51,14 @@ object Drivetrain : SubsystemBase() {
                 swerve.maximumVelocity
             )
         )
+    }
+
+    fun getTx(): Double{
+        return LimelightHelpers.getTX("")
+    }
+
+    fun getTy(): Double{
+        return LimelightHelpers.getTY("")
     }
 
     fun updateVision(){
