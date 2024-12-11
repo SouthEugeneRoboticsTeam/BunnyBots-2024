@@ -38,5 +38,7 @@ class IndexerRunTimer : Command() {
         return false
     }
 
-    override fun end(interrupted: Boolean) {}
+    override fun end(interrupted: Boolean) {
+        Indexer.stopMotor()
+    }
 }
