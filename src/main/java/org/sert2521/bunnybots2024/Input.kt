@@ -8,14 +8,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton
 import org.sert2521.bunnybots2024.commands.IndexerRun
 import org.sert2521.bunnybots2024.commands.IntakeRun
 
-import org.sert2521.bunnybots2024.commands.EmptyCommand
 import org.sert2521.bunnybots2024.subsystems.Drivetrain
 
 object Input {
     val driverController = XboxController(0)
     val gunnerController = Joystick(1)
 
-    val exampleButton = JoystickButton(gunnerController, 1)
     val resetRotation = JoystickButton(driverController, 4)
 
     var rotationOffset = Rotation2d(0.0)
@@ -24,7 +22,6 @@ object Input {
 
 
     init{
-        exampleButton.whileTrue(EmptyCommand())
         resetRotation.onTrue(InstantCommand({ rotationOffset=Drivetrain.getPose().rotation }))
         IntakeButton.whileTrue(IntakeRun())
         IndexerButton.whileTrue(IndexerRun())

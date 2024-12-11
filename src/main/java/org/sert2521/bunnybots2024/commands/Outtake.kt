@@ -3,7 +3,7 @@ package org.sert2521.bunnybots2024.commands
 import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.bunnybots2024.subsystems.Indexer
 
-class IndexerRun : Command() {
+class Outtake : Command() {
 
 
     init {
@@ -15,12 +15,7 @@ class IndexerRun : Command() {
 
     override fun execute() {
         //sets the indexer speed to 0.3 when a balloon is in the beam break and stops it when there isn't
-        if (Indexer.getBeamBreak()){
-            Indexer.setMotor(0.3)
-        }
-        else {
-            Indexer.stopMotor()
-        }
+        Indexer.setMotor(0.3)
     }
 
     override fun isFinished(): Boolean {
