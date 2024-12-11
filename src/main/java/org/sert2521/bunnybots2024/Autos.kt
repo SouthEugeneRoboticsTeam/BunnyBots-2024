@@ -10,6 +10,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.sert2521.bunnybots2024.PhysicalConstants.WRIST_INTAKE_POSITION
+import org.sert2521.bunnybots2024.PhysicalConstants.WRIST_STOW_POSITION
+import org.sert2521.bunnybots2024.commands.IndexerOuttake
+import org.sert2521.bunnybots2024.commands.IntakeRun
+import org.sert2521.bunnybots2024.commands.SetWrist
+import org.sert2521.bunnybots2024.commands.VisionStopDrive
 import org.sert2521.bunnybots2024.subsystems.Drivetrain
 
 object Autos : SubsystemBase() {
@@ -17,7 +23,11 @@ object Autos : SubsystemBase() {
     private val defaultAutoCommand = Commands.none()
 
     private var commandList = mapOf<String, Command>(
-
+        "outtake" to IndexerOuttake(),
+        "wrist intake position" to SetWrist(WRIST_INTAKE_POSITION),
+        "wrist stow position" to SetWrist(WRIST_STOW_POSITION),
+        "stop at tote" to VisionStopDrive(),
+        "intake" to IntakeRun()
     )
 
     init {

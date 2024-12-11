@@ -55,6 +55,7 @@ object TunedConstants{
 
     //Other stuff
     const val WRIST_ANGLE_TOLERANCE = 0.1
+    const val VISION_AUTO_TOLERANCE = 0.1
 }
 
 object RuntimeConstants {
