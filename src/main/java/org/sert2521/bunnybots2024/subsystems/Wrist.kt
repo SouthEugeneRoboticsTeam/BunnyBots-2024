@@ -3,6 +3,8 @@ package org.sert2521.bunnybots2024.subsystems
 import com.revrobotics.CANSparkBase
 import com.revrobotics.CANSparkLowLevel
 import com.revrobotics.CANSparkMax
+import edu.wpi.first.math.MathUtil
+import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.wpilibj.DutyCycleEncoder
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.bunnybots2024.ElectricIDs
@@ -10,7 +12,7 @@ import org.sert2521.bunnybots2024.ElectricIDs.DUTY_ENCODER_ID
 import org.sert2521.bunnybots2024.PhysicalConstants
 import kotlin.math.PI
 
-object WristSubsystem : SubsystemBase() {
+object Wrist : SubsystemBase() {
     val wristMotor = CANSparkMax(ElectricIDs.WRIST_ID, CANSparkLowLevel.MotorType.kBrushless)
     val absEncoder = DutyCycleEncoder(DUTY_ENCODER_ID)
 
@@ -21,7 +23,7 @@ object WristSubsystem : SubsystemBase() {
         wristMotor.inverted = false;
 
         //sets up encoder
-        absEncoder.distancePerRotation = 2*PI
+        absEncoder.distancePerRotation = 2.79
         absEncoder.positionOffset = PhysicalConstants.WRIST_ENCODER_OFFSET
     }
 
@@ -45,8 +47,16 @@ object WristSubsystem : SubsystemBase() {
         return absEncoder.distance
     }
 
+    fun getRotation(): Rotation2d {
+        return Rotation2d(absEncoder.distance)
+    }
+
+    fun getWrappedAngle(): Double {
+        return MathUtil.inputModulus(absEncoder.distance, -PI/2, 3*PI/2)
+    }
+
     //Stops the wrist motor
     fun stop() {
-        wristMotor.stopMotor();
+        wristMotor.stopMotor()
     }
 }
