@@ -1,7 +1,6 @@
 package org.sert2521.bunnybots2024
 
-import com.revrobotics.CANSparkLowLevel
-import com.revrobotics.CANSparkMax
+import kotlin.math.PI
 
 object ConfigConstants{
     const val MAX_DRIVE_SPEED = 4.239
@@ -11,7 +10,7 @@ object ConfigConstants{
 }
 
 //Most swerve config is in deploy/swerve as .json files
-object SwerveConstants{
+object AutoConstants{
     const val AUTO_POWER_P = 0.0
     const val AUTO_POWER_I = 0.0
     const val AUTO_POWER_D = 0.0
@@ -28,7 +27,10 @@ object SwerveConstants{
     const val AUTO_REPLANNING_SPIKE = 0.0
 }
 object PhysicalConstants {
-    const val WRIST_ENCODER_OFFSET = 0.1;
+    const val WRIST_ENCODER_OFFSET = 0.1
+
+    const val WRIST_STOW_POSITION = PI/2
+    const val WRIST_INTAKE_POSITION = -0.2
 }
 
 object ElectricIDs{

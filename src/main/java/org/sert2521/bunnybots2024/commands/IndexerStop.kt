@@ -1,24 +1,23 @@
 package org.sert2521.bunnybots2024.commands
 
 import edu.wpi.first.wpilibj2.command.Command
-import org.sert2521.bunnybots2024.subsystems.Intake
+import org.sert2521.bunnybots2024.subsystems.Indexer
 
-class IntakeRun: Command()
-{
-    private val intake = Intake
+class IndexerStop : Command() {
 
 
-    init
-    {
+    init {
         // each subsystem used by the command must be passed into the addRequirements() method
-        addRequirements(intake)
+        addRequirements(Indexer)
     }
 
     override fun initialize() {
-        Intake.setMotor(0.5)
+        Indexer.stopMotor()
     }
 
-    override fun execute() {}
+    override fun execute() {
+        Indexer.stopMotor()
+    }
 
     override fun isFinished(): Boolean {
         // TODO: Make this return true when this Command no longer needs to run execute()
@@ -26,6 +25,6 @@ class IntakeRun: Command()
     }
 
     override fun end(interrupted: Boolean) {
-        Intake.stop()
+        Indexer.stopMotor()
     }
 }

@@ -1,21 +1,20 @@
 package org.sert2521.bunnybots2024.commands
 
 import edu.wpi.first.wpilibj2.command.Command
-import org.sert2521.bunnybots2024.subsystems.Indexer
+import org.sert2521.bunnybots2024.subsystems.Intake
 
-class Outtake : Command() {
+class IntakeReverse : Command() {
 
 
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
-        addRequirements(Indexer)
+        addRequirements()
     }
 
     override fun initialize() {}
 
     override fun execute() {
-        //sets the indexer speed to 0.3 when a balloon is in the beam break and stops it when there isn't
-        Indexer.setMotor(0.3)
+        Intake.setMotor(-0.8)
     }
 
     override fun isFinished(): Boolean {
@@ -23,7 +22,5 @@ class Outtake : Command() {
         return false
     }
 
-    override fun end(interrupted: Boolean) {
-        Indexer.stopMotor()
-    }
+    override fun end(interrupted: Boolean) {}
 }

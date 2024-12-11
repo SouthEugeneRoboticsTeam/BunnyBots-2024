@@ -42,14 +42,14 @@ class JoystickDrive(private val fieldOriented:Boolean = true) : Command() {
 
 
         //this math works just believe
-        var mult = 0.0
-        if (x == 0.0 || y == 0.0){
-            mult = 1.0
-        }else if (abs(x)>=abs(y)){
-            mult = abs(cos(angle))
-        } else {
-            mult = abs(sin(angle))
-        }
+        val mult: Double =
+            if (x == 0.0 || y == 0.0){
+                1.0
+            }else if (abs(x)>=abs(y)){
+                abs(cos(angle))
+            } else {
+                abs(sin(angle))
+            }
 
         magnitude *= mult
 

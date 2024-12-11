@@ -28,22 +28,22 @@ object Autos : SubsystemBase() {
             Drivetrain::driveRobotOriented,
             HolonomicPathFollowerConfig(
                 PIDConstants(
-                    SwerveConstants.AUTO_POWER_P,
-                    SwerveConstants.AUTO_POWER_I,
-                    SwerveConstants.AUTO_POWER_D
+                    AutoConstants.AUTO_POWER_P,
+                    AutoConstants.AUTO_POWER_I,
+                    AutoConstants.AUTO_POWER_D
                 ),
                 PIDConstants(
-                    SwerveConstants.AUTO_ANGLE_P,
-                    SwerveConstants.AUTO_ANGLE_I,
-                    SwerveConstants.AUTO_ANGLE_D
+                    AutoConstants.AUTO_ANGLE_P,
+                    AutoConstants.AUTO_ANGLE_I,
+                    AutoConstants.AUTO_ANGLE_D
                 ),
-                SwerveConstants.MAX_AUTO_SPEED,
-                SwerveConstants.DRIVE_BASE_RADIUS,
+                AutoConstants.MAX_AUTO_SPEED,
+                AutoConstants.DRIVE_BASE_RADIUS,
                 ReplanningConfig(
                     false,
                     true,
-                    SwerveConstants.AUTO_REPLANNING_TOTAL_ERROR,
-                    SwerveConstants.AUTO_REPLANNING_SPIKE
+                    AutoConstants.AUTO_REPLANNING_TOTAL_ERROR,
+                    AutoConstants.AUTO_REPLANNING_SPIKE
                 )
             ),
             {DriverStation.getAlliance().get()==DriverStation.Alliance.Red},
