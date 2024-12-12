@@ -34,11 +34,11 @@ object PhysicalConstants {
 }
 
 object ElectricIDs{
-    const val INTAKE_ID = -1
-    const val INDEXER_BEAM_BREAK_ID = -1
-    const val INDEXER_MOTOR_ID = -1
-    const val WRIST_ID = -1
-    const val DUTY_ENCODER_ID = -1
+    const val INTAKE_ID = 14
+    const val INDEXER_BEAM_BREAK_ID = 0
+    const val INDEXER_MOTOR_ID = 15
+    const val WRIST_ID = 13
+    const val DUTY_ENCODER_ID = 1
 }
 
 object TunedConstants{
