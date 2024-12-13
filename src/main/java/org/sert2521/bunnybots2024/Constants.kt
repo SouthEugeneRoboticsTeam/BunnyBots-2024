@@ -27,7 +27,7 @@ object AutoConstants{
     const val AUTO_REPLANNING_SPIKE = 0.0
 }
 object PhysicalConstants {
-    const val WRIST_ENCODER_OFFSET = 0.1
+    const val WRIST_ENCODER_OFFSET = 0.0
 
     const val WRIST_STOW_POSITION = PI/2
     const val WRIST_INTAKE_POSITION = -0.2
@@ -35,10 +35,10 @@ object PhysicalConstants {
 
 object ElectricIDs{
     const val INTAKE_ID = 14
-    const val INDEXER_BEAM_BREAK_ID = 0
+    const val INDEXER_BEAM_BREAK_ID = 2
     const val INDEXER_MOTOR_ID = 15
     const val WRIST_ID = 13
-    const val DUTY_ENCODER_ID = 1
+    const val DUTY_ENCODER_ID = 0
 }
 
 object TunedConstants{
