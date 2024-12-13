@@ -15,10 +15,13 @@ class IntakeRun: Command()
     }
 
     override fun initialize() {
-        Intake.setMotor(0.5)
+        Intake.setMotor(1.0)
     }
 
-    override fun execute() {}
+    override fun execute() {
+        Intake.setMotor(1.0)
+
+    }
 
     override fun isFinished(): Boolean {
         // TODO: Make this return true when this Command no longer needs to run execute()

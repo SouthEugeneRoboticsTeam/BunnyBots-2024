@@ -1,5 +1,6 @@
 package org.sert2521.bunnybots2024
 
+import edu.wpi.first.math.trajectory.TrapezoidProfile
 import kotlin.math.PI
 
 object ConfigConstants{
@@ -27,31 +28,33 @@ object AutoConstants{
     const val AUTO_REPLANNING_SPIKE = 0.0
 }
 object PhysicalConstants {
-    const val WRIST_ENCODER_OFFSET = 0.0
+    const val WRIST_ENCODER_OFFSET = 0.55/2.79
 
-    const val WRIST_STOW_POSITION = PI/2
-    const val WRIST_INTAKE_POSITION = -0.2
+    const val WRIST_STOW_POSITION = 1.846
+    const val WRIST_INTAKE_POSITION = -0.15
 }
 
 object ElectricIDs{
-    const val INTAKE_ID = 14
-    const val INDEXER_BEAM_BREAK_ID = 2
+    const val INTAKE_ID = 13
+    const val INDEXER_BEAM_BREAK_ID = 3
     const val INDEXER_MOTOR_ID = 15
-    const val WRIST_ID = 13
+    const val WRIST_ID = 14
     const val DUTY_ENCODER_ID = 0
 }
 
 object TunedConstants{
     //Feed forward variables
-    const val WRIST_S = 0.0
+    const val WRIST_S = 0.8
     const val WRIST_G = 0.1
     const val WRIST_V = 0.88
     const val WRIST_A = 0.0
 
     //PID loop variables
-    const val WRIST_P = 0.0
+    const val WRIST_P = 6.0
     const val WRIST_I = 0.0
     const val WRIST_D = 0.0
+
+    val WRIST_TRAP = TrapezoidProfile.Constraints(2.0, 3.0)
 
     //Other stuff
     const val WRIST_ANGLE_TOLERANCE = 0.1

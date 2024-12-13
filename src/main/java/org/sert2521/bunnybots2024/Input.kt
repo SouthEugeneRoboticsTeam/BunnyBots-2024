@@ -27,17 +27,16 @@ object Input {
     val indexerReverse = JoystickButton(gunnerController, 4)
     val indexerStop = JoystickButton(gunnerController, 13)
     val indexerEnable = JoystickButton(gunnerController, 12)
-    val wristStow = JoystickButton(gunnerController, 8)
-    val wristIntake = JoystickButton(gunnerController, 9)
+    val wristStow = JoystickButton(gunnerController, 9)
+    val wristIntakePos = JoystickButton(gunnerController, 8)
+    val indexerForce = JoystickButton(gunnerController, 10)
 
 
     init{
         resetRotation.onTrue(InstantCommand({ rotationOffset=Drivetrain.getPose().rotation }))
-        intakeButton.whileTrue(IntakeRun())
         outtakeButton.whileTrue(IndexerOuttake())
 
-
-
+        intakeButton.whileTrue(IntakeRun().alongWith(IndexerOuttake()))
         bothReverse.whileTrue(IndexerReverse().alongWith(IntakeReverse()))
         intakeReverse.whileTrue(IntakeReverse())
         indexerReverse.whileTrue(IndexerReverse())
@@ -46,7 +45,8 @@ object Input {
 
 
         wristStow.onTrue(SetWrist(PhysicalConstants.WRIST_STOW_POSITION))
-        wristIntake.onTrue(SetWrist(PhysicalConstants.WRIST_INTAKE_POSITION))
+        wristIntakePos.onTrue(SetWrist(PhysicalConstants.WRIST_INTAKE_POSITION))
+        indexerForce.whileTrue(IndexerOuttake())
 
 
 

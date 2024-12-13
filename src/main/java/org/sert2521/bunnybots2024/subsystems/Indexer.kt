@@ -38,7 +38,7 @@ object Indexer : Subsystem {
 
     //gets beam break
     fun getBeamBreak():Boolean{
-        return !beamBreak.get()
+        return false
     }
 
     /*fun getEncoderValue(){

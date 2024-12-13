@@ -15,6 +15,7 @@ object Intake: Subsystem {
     }
     fun setMotor(speed:Double) {
         intakeMotor.set(speed)
+        println(intakeMotor.encoder.velocity)
     }
     fun stop(){
         intakeMotor.stopMotor()

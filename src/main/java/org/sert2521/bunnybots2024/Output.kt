@@ -29,7 +29,7 @@ object Output:SubsystemBase() {
 
         bools.add(Pair("Beambreak"){ Indexer.getBeamBreak() })
 
-        values.add(Pair("Abs Encoder"){ Wrist.getWrappedAngle() })
+        values.add(Pair("Abs Encoder"){ Wrist.getRadians() })
 
 
     }

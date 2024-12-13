@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj.util.WPILibVersion
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.CommandScheduler
+import org.sert2521.bunnybots2024.commands.SetWrist
 import org.sert2521.bunnybots2024.subsystems.Drivetrain
 import kotlin.math.*
 
@@ -68,7 +69,7 @@ object Robot : TimedRobot()
 
     override fun teleopInit()
     {
-
+        SetWrist(PhysicalConstants.WRIST_STOW_POSITION)
     }
 
     /** This method is called periodically during operator control.  */
