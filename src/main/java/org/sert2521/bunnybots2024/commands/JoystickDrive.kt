@@ -41,7 +41,9 @@ class JoystickDrive(private val fieldOriented:Boolean = true) : Command() {
         val angle = atan2(y, x)
 
 
-        //this math works just believe
+        //this math works just trust
+        //it normalizes the magnitude from a square output range to a circular one
+        //new magnitude is true to actual distance from the center
         val mult: Double =
             if (x == 0.0 || y == 0.0){
                 1.0
@@ -53,10 +55,10 @@ class JoystickDrive(private val fieldOriented:Boolean = true) : Command() {
 
         magnitude *= mult
 
-        SmartDashboard.putNumber("Joystick Angle", angle)
-
+        //Do joystick curve
         magnitude = magnitude.pow(3)
 
+        //reconstructs the x and y components from polar coordinates
         val newX = cos(angle)*magnitude
         val newY = sin(angle)*magnitude
 

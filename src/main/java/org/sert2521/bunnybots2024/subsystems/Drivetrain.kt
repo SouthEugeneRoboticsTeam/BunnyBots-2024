@@ -61,9 +61,9 @@ object Drivetrain : SubsystemBase() {
     }
 
     fun updateVision(){
+        //example code LL gave us
+        //probably correct
         var rejectUpdate = false
-
-
         LimelightHelpers.SetRobotOrientation(
             "limelight",
             swerve.yaw.degrees,
@@ -107,22 +107,6 @@ object Drivetrain : SubsystemBase() {
 
     fun getMaxSpeed():Double{
         return swerve.maximumVelocity
-    }
-
-    fun driveCommand(): Command {
-        return run{
-            val scaledInputs = SwerveMath.scaleTranslation(Translation2d(
-                Input.getJoystickX(),
-                Input.getJoystickY()),
-                0.8
-            )
-            driveFieldOriented(swerve.swerveController.getTargetSpeeds(scaledInputs.x, scaledInputs.y,
-                Input.getJoystickZ(),
-                Input.getRotY(),
-                swerve.odometryHeading.radians,
-                swerve.maximumVelocity
-            ));
-        }
     }
 
 
