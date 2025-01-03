@@ -30,6 +30,7 @@ object Output:SubsystemBase() {
         bools.add(Pair("Beambreak"){ Indexer.getBeamBreak() })
 
         values.add(Pair("Abs Encoder"){ Wrist.getRadians() })
+        values.add(Pair("Wrapped Encoder"){Wrist.getWrappedAngle()})
 
 
     }
@@ -61,6 +62,8 @@ object Output:SubsystemBase() {
 
         SmartDashboard.putNumber("Joystick Angle", angle)
         SmartDashboard.putNumber("Joystick Magnitude", magnitude)
+
+        //SmartDashboard.putData(Autos.getAutoChooser())
     }
 
     override fun periodic() {

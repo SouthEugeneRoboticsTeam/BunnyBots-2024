@@ -2,20 +2,25 @@ package org.sert2521.bunnybots2024.commands
 
 import edu.wpi.first.wpilibj2.command.Command
 import org.sert2521.bunnybots2024.subsystems.Indexer
+import org.sert2521.bunnybots2024.subsystems.Intake
 
-class IndexerOuttake(private val speed:Double = 0.15) : Command() {
+class IndexerOuttakeMore : Command() {
+    private val indexer = Indexer
 
 
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
-        addRequirements(Indexer)
+        addRequirements(indexer, Intake)
     }
 
-    override fun initialize() {}
+    override fun initialize() {
+        Indexer.setMotor(0.35)
+        Intake.setMotor(1.0)
+    }
 
     override fun execute() {
-        //sets the indexer speed to 0.3 when a balloon is in the beam break and stops it when there isn't
-        Indexer.setMotor(speed)
+        Indexer.setMotor(0.35)
+        Intake.setMotor(1.0)
     }
 
     override fun isFinished(): Boolean {
@@ -24,6 +29,7 @@ class IndexerOuttake(private val speed:Double = 0.15) : Command() {
     }
 
     override fun end(interrupted: Boolean) {
+        Intake.stop()
         Indexer.stopMotor()
     }
 }

@@ -15,11 +15,11 @@ class IntakeRun: Command()
     }
 
     override fun initialize() {
-        Intake.setMotor(1.0)
+        Intake.setMotor(0.75)
     }
 
     override fun execute() {
-        Intake.setMotor(1.0)
+        Intake.setMotor(0.75)
 
     }
 

@@ -39,6 +39,7 @@ object Wrist : SubsystemBase() {
     fun setVoltage(voltage: Double) {
         wristMotor.setVoltage(clamp(voltage, -12.0, 12.0))
         //println(voltage)
+        //println(getWrappedAngle())
     }
 
     //Resets Encoder

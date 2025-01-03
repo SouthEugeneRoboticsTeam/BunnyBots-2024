@@ -26,7 +26,7 @@ object Drivetrain : SubsystemBase() {
 
     init {
 
-        SwerveDriveTelemetry.verbosity = SwerveDriveTelemetry.TelemetryVerbosity.HIGH
+        SwerveDriveTelemetry.verbosity = SwerveDriveTelemetry.TelemetryVerbosity.NONE
 
         this.defaultCommand = JoystickDrive()
     }

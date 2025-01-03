@@ -9,6 +9,7 @@ import org.sert2521.bunnybots2024.commands.*
 
 import org.sert2521.bunnybots2024.subsystems.Drivetrain
 import org.sert2521.bunnybots2024.subsystems.Indexer
+import org.sert2521.bunnybots2024.subsystems.Wrist
 
 object Input {
     val driverController = XboxController(0)
@@ -22,31 +23,35 @@ object Input {
 
 
     val intakeButton = JoystickButton(gunnerController, 1)
-    val bothReverse = JoystickButton(gunnerController, 2)
     val intakeReverse = JoystickButton(gunnerController, 3)
     val indexerReverse = JoystickButton(gunnerController, 4)
     val indexerStop = JoystickButton(gunnerController, 13)
     val indexerEnable = JoystickButton(gunnerController, 12)
-    val wristStow = JoystickButton(gunnerController, 9)
+    val wristStow = JoystickButton(gunnerController, 10)
+    val wristCorallPos = JoystickButton(gunnerController, 9)
     val wristIntakePos = JoystickButton(gunnerController, 8)
-    val indexerForce = JoystickButton(gunnerController, 10)
+    val indexerForce = JoystickButton(gunnerController, 2)
+    val reverseIntake = JoystickButton(gunnerController, 7)
 
 
     init{
         resetRotation.onTrue(InstantCommand({ rotationOffset=Drivetrain.getPose().rotation }))
         outtakeButton.whileTrue(IndexerOuttake())
 
-        intakeButton.whileTrue(IntakeRun().alongWith(IndexerOuttake()))
-        bothReverse.whileTrue(IndexerReverse().alongWith(IntakeReverse()))
-        intakeReverse.whileTrue(IntakeReverse())
+        intakeButton.whileTrue(IntakeRun())
+        //intakeButton.onFalse(SetWrist(PhysicalConstants.WRIST_CORALL_POSITION))
+        intakeReverse.whileTrue(IndexerOuttake())
         indexerReverse.whileTrue(IndexerReverse())
         indexerStop.onTrue(IndexerStop())
         indexerEnable.onTrue(InstantCommand({Indexer.currentCommand.cancel()}))
 
 
         wristStow.onTrue(SetWrist(PhysicalConstants.WRIST_STOW_POSITION))
+        wristCorallPos.onTrue(SetWrist(PhysicalConstants.WRIST_CORALL_POSITION))
         wristIntakePos.onTrue(SetWrist(PhysicalConstants.WRIST_INTAKE_POSITION))
-        indexerForce.whileTrue(IndexerOuttake())
+        reverseIntake.whileTrue(IntakeReverse())
+
+        indexerForce.whileTrue(IndexerOuttake().alongWith(IntakeRun()))
 
 
 

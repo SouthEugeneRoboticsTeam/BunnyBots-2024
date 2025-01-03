@@ -7,6 +7,7 @@ import com.pathplanner.lib.util.PIDConstants
 import com.pathplanner.lib.util.ReplanningConfig
 import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -23,7 +24,7 @@ object Autos : SubsystemBase() {
     private val defaultAutoCommand = Commands.none()
 
     private var commandList = mapOf<String, Command>(
-        "outtake" to IndexerOuttake(),
+        "outtake" to IndexerOuttake(0.6).withTimeout(3.0),
         "wrist intake position" to SetWrist(WRIST_INTAKE_POSITION),
         "wrist stow position" to SetWrist(WRIST_STOW_POSITION),
         "stop at tote" to VisionStopDrive(),
@@ -64,5 +65,10 @@ object Autos : SubsystemBase() {
 
         autoChooser=AutoBuilder.buildAutoChooser()
 
+        SmartDashboard.putData("Auto Chooser", autoChooser)
+    }
+
+    fun getAuto():Command{
+        return autoChooser.selected
     }
 }

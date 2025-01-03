@@ -33,6 +33,7 @@ object Robot : TimedRobot()
         Input
         Drivetrain
         Output
+        Autos
     }
     override fun robotInit()
     {
@@ -60,6 +61,7 @@ object Robot : TimedRobot()
 
     override fun autonomousInit()
     {
+        Autos.getAuto().schedule()
     }
 
     override fun autonomousPeriodic()

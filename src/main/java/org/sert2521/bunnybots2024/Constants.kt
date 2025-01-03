@@ -12,26 +12,30 @@ object ConfigConstants{
 
 //Most swerve config is in deploy/swerve as .json files
 object AutoConstants{
-    const val AUTO_POWER_P = 0.0
+    const val MAX_AUTO_SPEED = 4.0
+
+    const val AUTO_POWER_P = 2.0
     const val AUTO_POWER_I = 0.0
     const val AUTO_POWER_D = 0.0
 
-    const val AUTO_ANGLE_P = 0.0
+    const val AUTO_ANGLE_P = 2.0
     const val AUTO_ANGLE_I = 0.0
     const val AUTO_ANGLE_D = 0.0
 
-    const val MAX_AUTO_SPEED = 0.0
+    const val AUTO_REPLANNING_TOTAL_ERROR = 100.0
+    const val AUTO_REPLANNING_SPIKE = 100.0
 
-    const val DRIVE_BASE_RADIUS = 0.0
 
-    const val AUTO_REPLANNING_TOTAL_ERROR = 0.0
-    const val AUTO_REPLANNING_SPIKE = 0.0
+    const val DRIVE_BASE_RADIUS = 0.37268
+
+
 }
 object PhysicalConstants {
     const val WRIST_ENCODER_OFFSET = 0.55/2.79
 
-    const val WRIST_STOW_POSITION = 1.846
-    const val WRIST_INTAKE_POSITION = -0.15
+    const val WRIST_STOW_POSITION = PI/2
+    const val WRIST_CORALL_POSITION = -0.0
+    const val WRIST_INTAKE_POSITION = -0.2
 }
 
 object ElectricIDs{
@@ -54,7 +58,7 @@ object TunedConstants{
     const val WRIST_I = 0.0
     const val WRIST_D = 0.0
 
-    val WRIST_TRAP = TrapezoidProfile.Constraints(2.0, 3.0)
+    val WRIST_TRAP = TrapezoidProfile.Constraints(100.0, 100.0)
 
     //Other stuff
     const val WRIST_ANGLE_TOLERANCE = 0.1
